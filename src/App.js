@@ -676,14 +676,14 @@ const EngagementModels = () => {
   );
 };
 
-const IndustriesSection = () => {
+const IndustriesSection = ({ onNavigate }) => {
   const industries = [
-    { title: "Energy & Utilities", desc: "Delivering large scale projects including CRM (Salesforce) and ERP Oracle software systems for industry leaders.", icon: <Zap className="w-8 h-8 text-white" /> },
-    { title: "Pharma", desc: "Executing complex web and application projects across European markets for major pharmaceutical companies.", icon: <FlaskConical className="w-8 h-8 text-white" /> },
-    { title: "Tech", desc: "Building high-performance marketing websites and digital platforms for global technology giants.", icon: <Cpu className="w-8 h-8 text-white" /> },
-    { title: "Healthcare", desc: "Specialising in Systems Implementation and complex technical integrations for healthcare organisations.", icon: <HeartPulse className="w-8 h-8 text-white" /> },
-    { title: "Telecommunications", desc: "Driving digital transformation through robust systems implementation and technical integrations.", icon: <Signal className="w-8 h-8 text-white" /> },
-    { title: "Medtech", desc: "Supporting medical technology innovation with scalable architecture and data-driven solutions.", icon: <Stethoscope className="w-8 h-8 text-white" /> }
+    { id: "energy-utilities", title: "Energy & Utilities", desc: "Delivering large scale projects including CRM (Salesforce) and ERP Oracle software systems for industry leaders.", icon: <Zap className="w-8 h-8 text-white" /> },
+    { id: "pharma", title: "Pharma", desc: "Executing complex web and application projects across European markets for major pharmaceutical companies.", icon: <FlaskConical className="w-8 h-8 text-white" /> },
+    { id: "tech", title: "Tech", desc: "Building high-performance marketing websites and digital platforms for global technology giants.", icon: <Cpu className="w-8 h-8 text-white" /> },
+    { id: "healthcare", title: "Healthcare", desc: "Specialising in Systems Implementation and complex technical integrations for healthcare organisations.", icon: <HeartPulse className="w-8 h-8 text-white" /> },
+    { id: "telecommunications", title: "Telecommunications", desc: "Driving digital transformation through robust systems implementation and technical integrations.", icon: <Signal className="w-8 h-8 text-white" /> },
+    { id: "medtech", title: "Medtech", desc: "Supporting medical technology innovation with scalable architecture and data-driven solutions.", icon: <Stethoscope className="w-8 h-8 text-white" /> }
   ];
 
   return (
@@ -692,7 +692,11 @@ const IndustriesSection = () => {
         <SectionHeading sub="Sectors" title="Industries We Serve" align="center" />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {industries.map((ind, idx) => (
-            <div key={idx} className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-[#059669] hover:shadow-xl transition-all duration-300 group flex flex-col items-start">
+            <div
+              key={idx}
+              onClick={() => onNavigate && onNavigate(`industry-${ind.id}`)}
+              className="bg-white p-8 rounded-2xl border border-slate-200 hover:border-[#059669] hover:shadow-xl transition-all duration-300 group flex flex-col items-start cursor-pointer"
+            >
               <div className="bg-[#059669] p-4 rounded-xl shadow-lg shadow-[#059669]/20 mb-6 group-hover:scale-110 transition-transform duration-300">
                 {ind.icon}
               </div>
@@ -1428,7 +1432,408 @@ const CaseStudyDetailPage = ({ studyId, onNavigate }) => {
   );
 };
 
-// --- 6. CONTACT PAGE COMPONENT ---
+// --- 6. INDUSTRY DETAIL PAGE COMPONENT ---
+
+const IndustryDetailPage = ({ industryId, onNavigate }) => {
+  // Detailed Industry Data
+  const industryData = {
+    'energy-utilities': {
+      title: "Energy & Utilities",
+      icon: <Zap className="w-16 h-16 text-white" />,
+      tagline: "Powering the Future of Energy Infrastructure",
+      shortDesc: "Delivering large scale projects including CRM (Salesforce) and ERP Oracle software systems for industry leaders.",
+      fullDesc: "We partner with leading energy and utility companies to implement robust enterprise systems that drive operational excellence. From Salesforce CRM implementations to comprehensive ERP solutions, our expertise spans the full spectrum of energy sector digital transformation. We understand the unique challenges of the energy sector, including regulatory compliance, asset management, and the transition to renewable energy sources.",
+      features: [
+        "Salesforce Energy & Utilities Cloud implementation",
+        "Oracle ERP and asset management systems",
+        "Smart grid and IoT integration solutions",
+        "Regulatory compliance and reporting systems",
+        "Customer billing and payment platforms",
+        "Field service management optimization"
+      ],
+      benefits: [
+        "Streamlined operations across generation, transmission, and distribution",
+        "Enhanced customer experience with modern digital platforms",
+        "Real-time visibility into asset performance and maintenance",
+        "Improved regulatory compliance and reporting accuracy"
+      ],
+      caseStudies: ['global-renewable'],
+      stats: [
+        { label: "Enterprise Deployments", value: "50+" },
+        { label: "System Integrations", value: "70+" },
+        { label: "Efficiency Improvement", value: "60%" }
+      ],
+      image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=2070"
+    },
+    'pharma': {
+      title: "Pharmaceutical",
+      icon: <FlaskConical className="w-16 h-16 text-white" />,
+      tagline: "Accelerating Pharma Innovation Through Technology",
+      shortDesc: "Executing complex web and application projects across European markets for major pharmaceutical companies.",
+      fullDesc: "Our pharmaceutical clients benefit from our deep understanding of the industry's stringent regulatory requirements and complex supply chains. We deliver sophisticated web applications, clinical trial management systems, and enterprise integrations that support drug development, manufacturing, and distribution across global markets. Our solutions ensure compliance with FDA, EMA, and other regulatory bodies while maintaining the agility needed in today's competitive pharma landscape.",
+      features: [
+        "Clinical trial management systems (CTMS)",
+        "Regulatory compliance and documentation platforms",
+        "Supply chain and inventory management",
+        "Quality management systems (QMS) integration",
+        "Patient engagement and adherence platforms",
+        "Analytics and reporting for R&D operations"
+      ],
+      benefits: [
+        "Accelerated time-to-market for new drug development",
+        "Enhanced regulatory compliance and audit readiness",
+        "Improved collaboration across global research teams",
+        "Real-time visibility into clinical trial progress"
+      ],
+      caseStudies: [],
+      stats: [
+        { label: "European Markets", value: "15+" },
+        { label: "Compliance Systems", value: "100%" },
+        { label: "Project Success Rate", value: "98%" }
+      ],
+      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2070"
+    },
+    'tech': {
+      title: "Technology",
+      icon: <Cpu className="w-16 h-16 text-white" />,
+      tagline: "Building Digital Platforms for Tech Giants",
+      shortDesc: "Building high-performance marketing websites and digital platforms for global technology giants.",
+      fullDesc: "We work with leading technology companies to create cutting-edge digital experiences that showcase their products and drive customer engagement. From high-performance marketing websites to complex SaaS platforms, our solutions combine stunning design with robust technical architecture. We understand the fast-paced nature of the tech industry and deliver scalable, maintainable solutions that can evolve with your business.",
+      features: [
+        "High-performance marketing websites and landing pages",
+        "SaaS platform development and architecture",
+        "Developer portals and documentation sites",
+        "Product demo and sandbox environments",
+        "API integration and microservices architecture",
+        "Performance optimization and CDN implementation"
+      ],
+      benefits: [
+        "Lightning-fast load times and optimal user experience",
+        "Scalable architecture supporting millions of users",
+        "Seamless integration with existing tech stacks",
+        "Modern, responsive design across all devices"
+      ],
+      caseStudies: ['microsoft'],
+      stats: [
+        { label: "Global Tech Clients", value: "25+" },
+        { label: "Avg. Page Load Time", value: "<2s" },
+        { label: "Uptime Guarantee", value: "99.9%" }
+      ],
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2070"
+    },
+    'healthcare': {
+      title: "Healthcare",
+      icon: <HeartPulse className="w-16 h-16 text-white" />,
+      tagline: "Transforming Healthcare Through Digital Innovation",
+      shortDesc: "Specialising in Systems Implementation and complex technical integrations for healthcare organisations.",
+      fullDesc: "Healthcare organizations face unique challenges in managing patient data, ensuring regulatory compliance, and coordinating care across multiple systems. We specialize in Workday HRIS implementations, clinical system integrations, and patient engagement platforms that improve operational efficiency while maintaining the highest standards of data security and privacy. Our solutions support better patient outcomes through seamless information flow and improved care coordination.",
+      features: [
+        "Workday HRIS and workforce management",
+        "Electronic Health Record (EHR) integrations",
+        "Patient portal and engagement platforms",
+        "Healthcare analytics and reporting",
+        "HIPAA-compliant data management",
+        "Telehealth and remote monitoring systems"
+      ],
+      benefits: [
+        "Improved patient care coordination and outcomes",
+        "Enhanced operational efficiency and staff productivity",
+        "Robust security and regulatory compliance (HIPAA, GDPR)",
+        "Real-time insights into workforce and resource utilization"
+      ],
+      caseStudies: ['global-healthcare'],
+      stats: [
+        { label: "Healthcare Deployments", value: "30+" },
+        { label: "Efficiency Gain", value: "80%" },
+        { label: "Security Compliance", value: "100%" }
+      ],
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=2070"
+    },
+    'telecommunications': {
+      title: "Telecommunications",
+      icon: <Signal className="w-16 h-16 text-white" />,
+      tagline: "Driving Digital Transformation in Telecom",
+      shortDesc: "Driving digital transformation through robust systems implementation and technical integrations.",
+      fullDesc: "Telecommunications companies operate in one of the most competitive and rapidly evolving industries. We help telecom providers modernize their operations through strategic system implementations and complex integrations. Our expertise spans HR systems, billing platforms, customer service applications, and network management tools. We've successfully delivered multi-country Workday deployments and custom integration solutions that support millions of customers across Europe.",
+      features: [
+        "Multi-country Workday HRIS deployments",
+        "Billing and revenue management systems",
+        "Customer service and CRM platforms",
+        "Network management and monitoring tools",
+        "API development and system integration",
+        "Compliance and data governance solutions"
+      ],
+      benefits: [
+        "Consistent operations across multiple European markets",
+        "Improved customer service and reduced churn",
+        "Scalable infrastructure supporting business growth",
+        "Enhanced compliance with regional regulations"
+      ],
+      caseStudies: ['european-telecoms'],
+      stats: [
+        { label: "Countries Deployed", value: "12+" },
+        { label: "Custom Integrations", value: "25+" },
+        { label: "Active Users", value: "2M+" }
+      ],
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=2070"
+    },
+    'medtech': {
+      title: "Medical Technology",
+      icon: <Stethoscope className="w-16 h-16 text-white" />,
+      tagline: "Innovating at the Intersection of Medicine and Technology",
+      shortDesc: "Supporting medical technology innovation with scalable architecture and data-driven solutions.",
+      fullDesc: "Medical technology companies are at the forefront of healthcare innovation, developing devices and software that save lives and improve patient outcomes. We provide technical expertise to support medtech companies through their growth journey, from startup to enterprise. Our solutions encompass product development platforms, clinical data management, regulatory submission systems, and scalable cloud architectures that support both R&D and commercial operations.",
+      features: [
+        "Medical device data management and analytics",
+        "Regulatory submission and documentation systems",
+        "Clinical trial data collection and analysis",
+        "Quality management system (QMS) implementation",
+        "IoT and connected device platforms",
+        "Scalable cloud infrastructure (AWS, Azure, GCP)"
+      ],
+      benefits: [
+        "Accelerated product development and time-to-market",
+        "Robust data management for clinical and commercial use",
+        "FDA and CE mark compliance support",
+        "Scalable architecture supporting global growth"
+      ],
+      caseStudies: [],
+      stats: [
+        { label: "Medtech Clients", value: "15+" },
+        { label: "FDA Submissions", value: "40+" },
+        { label: "Data Accuracy", value: "99.9%" }
+      ],
+      image: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=2070"
+    }
+  };
+
+  const industry = industryData[industryId];
+
+  if (!industry) {
+    return (
+      <div className="pt-20 min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <AlertCircle className="w-16 h-16 text-slate-400 mx-auto mb-4" />
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Industry Not Found</h2>
+          <button onClick={() => onNavigate('industries')} className="text-[#059669] hover:underline">
+            View All Industries
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Get related case studies
+  const allCaseStudies = {
+    'microsoft': {
+      id: 'microsoft',
+      title: "Digital Transformation Project",
+      company: "Microsoft",
+      industry: "Tech",
+      technology: "Dynamics 365",
+      stat: "Sales & Awareness Uplift"
+    },
+    'global-healthcare': {
+      id: 'global-healthcare',
+      title: "Workday Implementation",
+      company: "Global Healthcare Org",
+      industry: "Healthcare",
+      technology: "Workday HRIS",
+      stat: "80% Efficiency Gain"
+    },
+    'european-telecoms': {
+      id: 'european-telecoms',
+      title: "HR Integration Model",
+      company: "European Telecoms Group",
+      industry: "Telecommunications",
+      technology: "Custom Integrations",
+      stat: "25+ Integrations"
+    },
+    'global-renewable': {
+      id: 'global-renewable',
+      title: "Unified Workday Environment",
+      company: "Global Renewable Energy",
+      industry: "Infrastructure",
+      technology: "Workday Studio",
+      stat: "70+ Integrations"
+    }
+  };
+
+  const relatedCaseStudies = industry.caseStudies.map(id => allCaseStudies[id]).filter(Boolean);
+
+  return (
+    <div className="pt-20 animate-fade-in">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-[#059669] text-white py-32 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#059669] rounded-full blur-3xl" />
+        </div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center justify-center w-24 h-24 bg-[#059669] rounded-2xl shadow-2xl shadow-[#059669]/50 mb-8">
+              {industry.icon}
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">{industry.title}</h1>
+            <p className="text-2xl text-slate-200 mb-8">{industry.tagline}</p>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              {industry.fullDesc}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats Section */}
+      {industry.stats && (
+        <div className="bg-white py-16 border-b border-slate-200">
+          <div className="container mx-auto px-6">
+            <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              {industry.stats.map((stat, idx) => (
+                <div key={idx} className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold text-[#059669] mb-2">{stat.value}</div>
+                  <div className="text-slate-600 font-medium">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Image Section */}
+      <div className="bg-slate-50 py-16">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
+            <img
+              src={industry.image}
+              alt={industry.title}
+              className="w-full h-96 object-cover rounded-2xl shadow-2xl"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Features Section */}
+      <div className="bg-white py-24">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 text-center">Our Expertise</h2>
+            <p className="text-lg text-slate-600 mb-12 text-center max-w-2xl mx-auto">
+              Comprehensive solutions tailored to the unique challenges of the {industry.title.toLowerCase()} industry.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              {industry.features.map((feature, idx) => (
+                <div key={idx} className="flex items-start space-x-4 p-6 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors">
+                  <CheckCircle2 className="w-6 h-6 text-[#059669] flex-shrink-0 mt-1" />
+                  <span className="text-slate-700 font-medium">{feature}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Benefits Section */}
+      <div className="bg-slate-50 py-24">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 text-center">Key Benefits</h2>
+            <p className="text-lg text-slate-600 mb-12 text-center max-w-2xl mx-auto">
+              Transform your operations with solutions designed for measurable impact.
+            </p>
+            <div className="space-y-6">
+              {industry.benefits.map((benefit, idx) => (
+                <div key={idx} className="flex items-start space-x-4 p-8 bg-white rounded-xl shadow-sm border border-slate-200 hover:border-[#059669] hover:shadow-lg transition-all">
+                  <div className="flex-shrink-0 w-10 h-10 bg-[#059669] text-white rounded-full flex items-center justify-center font-bold text-lg">
+                    {idx + 1}
+                  </div>
+                  <p className="text-slate-700 text-lg pt-1">{benefit}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Case Studies Section */}
+      {relatedCaseStudies.length > 0 && (
+        <div className="bg-white py-24">
+          <div className="container mx-auto px-6">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 text-center">Success Stories</h2>
+              <p className="text-lg text-slate-600 mb-12 text-center max-w-2xl mx-auto">
+                See how we've helped {industry.title.toLowerCase()} organizations achieve their goals.
+              </p>
+              <div className="grid md:grid-cols-2 gap-8">
+                {relatedCaseStudies.map((study) => (
+                  <div
+                    key={study.id}
+                    onClick={() => onNavigate(`case-study-${study.id}`)}
+                    className="bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-[#059669] hover:shadow-xl transition-all cursor-pointer group"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <div className="text-sm font-bold text-[#059669] uppercase mb-2">{study.industry}</div>
+                        <h3 className="text-2xl font-bold text-slate-900 mb-2 group-hover:text-[#059669] transition-colors">
+                          {study.company}
+                        </h3>
+                      </div>
+                      <ArrowUpRight className="w-6 h-6 text-slate-400 group-hover:text-[#059669] transition-colors" />
+                    </div>
+                    <p className="text-slate-600 mb-4">{study.title}</p>
+                    <div className="flex items-center justify-between pt-4 border-t border-slate-200">
+                      <span className="text-sm text-slate-500">{study.technology}</span>
+                      <span className="text-sm font-bold text-[#059669]">{study.stat}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CTA Section */}
+      <div className="bg-[#059669] py-24 text-center text-white">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your {industry.title} Operations?</h2>
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Let's discuss how our expertise can help you achieve your business goals.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              variant="simple"
+              className="bg-white text-[#059669] hover:bg-slate-100 hover:text-[#047857] px-8 py-4"
+              onClick={() => onNavigate('contact')}
+            >
+              Start a Conversation
+            </Button>
+            <Button
+              variant="simple"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#059669] px-8 py-4"
+              onClick={() => onNavigate('case-studies')}
+            >
+              View All Case Studies
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Back Link */}
+      <div className="bg-white py-16">
+        <div className="container mx-auto px-6 text-center">
+          <button
+            onClick={() => onNavigate('industries')}
+            className="text-[#059669] font-bold hover:underline flex items-center justify-center mx-auto text-lg"
+          >
+            <ArrowRight className="w-5 h-5 mr-2 rotate-180" /> Back to All Industries
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// --- 7. CONTACT PAGE COMPONENT ---
 
 const ContactPage = ({ onNavigate }) => {
   const [step, setStep] = useState(1);
@@ -1792,7 +2197,7 @@ const HomePage = ({ onNavigate }) => (
     <ServicesSection onNavigate={onNavigate} />
     <EngagementModels />
     <CaseStudiesSection onNavigate={onNavigate} />
-    <IndustriesSection />
+    <IndustriesSection onNavigate={onNavigate} />
   </>
 );
 
@@ -1834,6 +2239,196 @@ const CaseStudiesPage = ({ onNavigate }) => (
   </div>
 );
 
+const IndustriesPage = ({ onNavigate }) => {
+  const industries = [
+    {
+      id: "energy-utilities",
+      title: "Energy & Utilities",
+      desc: "Delivering large scale projects including CRM (Salesforce) and ERP Oracle software systems for industry leaders.",
+      icon: <Zap className="w-12 h-12 text-white" />,
+      image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      id: "pharma",
+      title: "Pharmaceutical",
+      desc: "Executing complex web and application projects across European markets for major pharmaceutical companies.",
+      icon: <FlaskConical className="w-12 h-12 text-white" />,
+      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      id: "tech",
+      title: "Technology",
+      desc: "Building high-performance marketing websites and digital platforms for global technology giants.",
+      icon: <Cpu className="w-12 h-12 text-white" />,
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      id: "healthcare",
+      title: "Healthcare",
+      desc: "Specialising in Systems Implementation and complex technical integrations for healthcare organisations.",
+      icon: <HeartPulse className="w-12 h-12 text-white" />,
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      id: "telecommunications",
+      title: "Telecommunications",
+      desc: "Driving digital transformation through robust systems implementation and technical integrations.",
+      icon: <Signal className="w-12 h-12 text-white" />,
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      id: "medtech",
+      title: "Medical Technology",
+      desc: "Supporting medical technology innovation with scalable architecture and data-driven solutions.",
+      icon: <Stethoscope className="w-12 h-12 text-white" />,
+      image: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&q=80&w=800"
+    }
+  ];
+
+  return (
+    <div className="pt-20 animate-fade-in">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-[#059669] text-white py-32 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#059669] rounded-full blur-3xl" />
+        </div>
+        <div className="container mx-auto px-6 relative z-10 text-center">
+          <div className="max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-8">
+              <Target className="w-5 h-5" />
+              <span className="text-sm font-medium">Industry Expertise</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">Industries We Serve</h1>
+            <p className="text-xl text-slate-200 max-w-3xl mx-auto">
+              From energy to healthcare, we bring deep industry knowledge and technical excellence to solve your most complex challenges.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Industries Grid */}
+      <div className="bg-white py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {industries.map((industry) => (
+              <div
+                key={industry.id}
+                onClick={() => onNavigate(`industry-${industry.id}`)}
+                className="group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-[#059669] hover:shadow-2xl transition-all duration-300 cursor-pointer"
+              >
+                {/* Industry Image */}
+                <div className="relative h-48 overflow-hidden bg-gradient-to-br from-slate-700 to-slate-900">
+                  <img
+                    src={industry.image}
+                    alt={industry.title}
+                    className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <div className="bg-[#059669] p-3 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      {industry.icon}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Industry Content */}
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="text-2xl font-bold text-slate-900 group-hover:text-[#059669] transition-colors">
+                      {industry.title}
+                    </h3>
+                    <ChevronRight className="w-6 h-6 text-slate-400 group-hover:text-[#059669] group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" />
+                  </div>
+                  <p className="text-slate-600 leading-relaxed mb-4">
+                    {industry.desc}
+                  </p>
+                  <div className="flex items-center text-[#059669] font-medium text-sm group-hover:underline">
+                    Learn More
+                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Why Choose Us Section */}
+      <div className="bg-slate-50 py-24">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+              Industry-Specific Expertise
+            </h2>
+            <p className="text-lg text-slate-600">
+              We don't just understand technology—we understand your industry. Our team combines technical excellence with deep domain knowledge to deliver solutions that address your unique challenges.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+              <div className="w-16 h-16 bg-[#059669] bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Lightbulb className="w-8 h-8 text-[#059669]" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Deep Domain Knowledge</h3>
+              <p className="text-slate-600">
+                Our consultants have worked extensively in your industry and understand the specific regulations, challenges, and opportunities you face.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+              <div className="w-16 h-16 bg-[#059669] bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Trophy className="w-8 h-8 text-[#059669]" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Proven Track Record</h3>
+              <p className="text-slate-600">
+                We've delivered successful projects for leading organizations across all the industries we serve, with measurable results.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center">
+              <div className="w-16 h-16 bg-[#059669] bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Rocket className="w-8 h-8 text-[#059669]" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Future-Ready Solutions</h3>
+              <p className="text-slate-600">
+                Our solutions are built for scale and adaptability, ensuring they can grow and evolve with your business and industry.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-[#059669] py-24 text-center text-white">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
+          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Let's discuss how our industry expertise can help you achieve your business objectives.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              variant="simple"
+              className="bg-white text-[#059669] hover:bg-slate-100 hover:text-[#047857] px-8 py-4"
+              onClick={() => onNavigate('contact')}
+            >
+              Contact Us Today
+            </Button>
+            <Button
+              variant="simple"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#059669] px-8 py-4"
+              onClick={() => onNavigate('case-studies')}
+            >
+              View Case Studies
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // --- MAIN APP COMPONENT ---
 
 export default function App() {
@@ -1848,10 +2443,15 @@ export default function App() {
       const serviceId = currentView.replace('service-', '');
       return <ServiceDetailPage serviceId={serviceId} onNavigate={setCurrentView} />;
     }
-    
+
     if (currentView.startsWith('case-study-')) {
       const studyId = currentView.replace('case-study-', '');
       return <CaseStudyDetailPage studyId={studyId} onNavigate={setCurrentView} />;
+    }
+
+    if (currentView.startsWith('industry-')) {
+      const industryId = currentView.replace('industry-', '');
+      return <IndustryDetailPage industryId={industryId} onNavigate={setCurrentView} />;
     }
 
     switch(currentView) {
@@ -1862,7 +2462,7 @@ export default function App() {
       case 'case-studies':
         return <CaseStudiesPage onNavigate={setCurrentView} />;
       case 'industries':
-        return <HomePage onNavigate={setCurrentView} />;
+        return <IndustriesPage onNavigate={setCurrentView} />;
       case 'home':
       default:
         return <HomePage onNavigate={setCurrentView} />;
