@@ -323,7 +323,7 @@ const Navbar = ({ onNavigate }) => {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 top-20 bg-white z-40 p-6 flex flex-col space-y-6 lg:hidden overflow-y-auto">
+        <div className="fixed left-0 right-0 top-[80px] bottom-0 bg-white z-40 p-6 flex flex-col space-y-6 lg:hidden overflow-y-auto min-h-[calc(100vh-80px)]">
           <button onClick={() => handleNav('services')} className="text-xl font-bold text-slate-900 hover:text-[#059669] text-left">Services</button>
           <button onClick={() => handleNav('case-studies')} className="text-xl font-bold text-slate-900 hover:text-[#059669] text-left">Case Studies</button>
           <button onClick={() => handleNav('industries')} className="text-xl font-bold text-slate-900 hover:text-[#059669] text-left">Industries</button>
