@@ -963,7 +963,7 @@ const ServiceDetailPage = ({ serviceId, onNavigate }) => {
   if (!service) return <div className="pt-32 text-center">Service not found</div>;
 
   return (
-    <div className="pt-20 animate-fade-in bg-white min-h-screen">
+    <div className="pt-28 md:pt-20 animate-fade-in bg-white min-h-screen">
       {/* 1. Hero Section */}
       <div className="bg-slate-900 py-32 text-center text-white relative overflow-hidden">
         {/* Neural Network Background Animation (Reused from Home) */}
@@ -1250,7 +1250,7 @@ const CaseStudyDetailPage = ({ studyId, onNavigate }) => {
   if (!study) return <div className="pt-32 text-center">Case Study not found</div>;
 
   return (
-    <div className="pt-20 animate-fade-in bg-white min-h-screen">
+    <div className="pt-28 md:pt-20 animate-fade-in bg-white min-h-screen">
       {/* Hero Section - UPDATED TO ERGO STYLE */}
       <section className="relative w-full">
         <div className="container mx-auto px-6 pt-12 lg:pt-24 pb-12">
@@ -1662,7 +1662,7 @@ const IndustryDetailPage = ({ industryId, onNavigate }) => {
   const relatedCaseStudies = industry.caseStudies.map(id => allCaseStudies[id]).filter(Boolean);
 
   return (
-    <div className="pt-20 animate-fade-in">
+    <div className="pt-28 md:pt-20 animate-fade-in">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-[#059669] text-white py-32 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -1938,7 +1938,7 @@ const ContactPage = ({ onNavigate }) => {
   const budgets = ['< €10k', '€10k - €50k', '€50k - €100k', '€100k+'];
 
   return (
-    <div className="pt-20 min-h-screen bg-slate-50 flex flex-col">
+    <div className="pt-28 md:pt-20 min-h-screen bg-slate-50 flex flex-col">
       <div className="flex-grow container mx-auto px-6 py-12 flex flex-col items-center justify-center">
         
         {/* Progress Bar */}
@@ -2202,7 +2202,7 @@ const HomePage = ({ onNavigate }) => (
 );
 
 const ServicesPage = ({ onNavigate }) => (
-  <div className="pt-20 animate-fade-in">
+  <div className="pt-28 md:pt-20 animate-fade-in">
     <div className="bg-slate-50 py-24 text-center">
       <div className="container mx-auto px-6">
         <h1 className="text-5xl font-bold text-slate-900 mb-6">Our Expertise</h1>
@@ -2225,7 +2225,7 @@ const ServicesPage = ({ onNavigate }) => (
 );
 
 const CaseStudiesPage = ({ onNavigate }) => (
-  <div className="pt-20 animate-fade-in">
+  <div className="pt-28 md:pt-20 animate-fade-in">
     <div className="bg-slate-900 py-24 text-center text-white relative overflow-hidden">
       <div className="absolute inset-0 bg-[#059669]/10 opacity-30" />
       <div className="container mx-auto px-6 relative z-10">
@@ -2286,7 +2286,7 @@ const IndustriesPage = ({ onNavigate }) => {
   ];
 
   return (
-    <div className="pt-20 animate-fade-in">
+    <div className="pt-28 md:pt-20 animate-fade-in">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-[#059669] text-white py-32 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
