@@ -279,6 +279,18 @@ const Navbar = ({ onNavigate }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   const handleNav = (view) => {
     onNavigate(view);
     setIsOpen(false);
@@ -286,16 +298,16 @@ const Navbar = ({ onNavigate }) => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md py-4 border-b border-slate-200 shadow-sm' : 'bg-transparent py-6'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-white/95 backdrop-blur-md py-4 border-b border-slate-200 shadow-sm' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a onClick={() => handleNav('home')} className="block cursor-pointer">
-          <img 
-            src="https://knowdata.ie/assets/Screenshot%202025-10-17%20at%2011.56.43_1760698746447-BDxWxUXy.png" 
-            alt="Knowdata Logo" 
+          <img
+            src="https://knowdata.ie/assets/Screenshot%202025-10-17%20at%2011.56.43_1760698746447-BDxWxUXy.png"
+            alt="Knowdata Logo"
             className="h-12 w-auto object-contain"
           />
         </a>
-        
+
         <div className="hidden lg:flex items-center space-x-8">
           <nav className="flex space-x-6">
             <button onClick={() => handleNav('services')} className="text-sm font-medium text-slate-600 hover:text-[#059669] transition-colors">Services</button>
@@ -311,7 +323,7 @@ const Navbar = ({ onNavigate }) => {
       </div>
 
       {isOpen && (
-        <div className="fixed inset-0 top-20 bg-white z-40 p-6 flex flex-col space-y-6 lg:hidden border-t border-slate-200">
+        <div className="fixed inset-0 top-20 bg-white z-40 p-6 flex flex-col space-y-6 lg:hidden overflow-y-auto">
           <button onClick={() => handleNav('services')} className="text-xl font-bold text-slate-900 hover:text-[#059669] text-left">Services</button>
           <button onClick={() => handleNav('case-studies')} className="text-xl font-bold text-slate-900 hover:text-[#059669] text-left">Case Studies</button>
           <button onClick={() => handleNav('industries')} className="text-xl font-bold text-slate-900 hover:text-[#059669] text-left">Industries</button>
