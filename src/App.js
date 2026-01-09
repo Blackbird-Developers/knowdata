@@ -298,7 +298,7 @@ const Navbar = ({ onNavigate }) => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-white/95 backdrop-blur-md py-4 border-b border-slate-200 shadow-sm' : 'bg-transparent py-6'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-white/95 backdrop-blur-md py-4 border-b border-slate-200 shadow-sm' : 'bg-white/95 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none py-4 lg:py-6 border-b lg:border-b-0 border-slate-200'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a onClick={() => handleNav('home')} className="block cursor-pointer">
           <img
@@ -317,7 +317,7 @@ const Navbar = ({ onNavigate }) => {
           <Button variant="glow" className="py-2 px-6 text-sm" onClick={() => handleNav('contact')}>Contact Us</Button>
         </div>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-slate-900">
+        <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-slate-900 relative z-50">
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
