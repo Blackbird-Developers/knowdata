@@ -138,13 +138,13 @@ const Navbar = ({ onNavigate, currentView }) => {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-white/95 backdrop-blur-md py-4 border-b border-slate-200 shadow-sm' : 'bg-white/95 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none py-4 lg:py-6 border-b lg:border-b-0 border-slate-200'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a onClick={() => handleNav('home')} className="block cursor-pointer">
+        <button onClick={() => handleNav('home')} className="block cursor-pointer bg-transparent border-none p-0">
           <img
             src="https://knowdata.ie/assets/Screenshot%202025-10-17%20at%2011.56.43_1760698746447-BDxWxUXy.png"
             alt="Knowdata Logo"
             className="h-12 w-auto object-contain"
           />
-        </a>
+        </button>
 
         <div className="hidden lg:flex items-center space-x-8">
           <nav className="flex items-center space-x-6">
@@ -1065,7 +1065,7 @@ const ContactPage = ({ onNavigate }) => {
   const [errors, setErrors] = useState({});
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const validatePhone = (phone) => /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(phone) || /^\+?[\d\s-]{7,}$/.test(phone.replace(/\s/g, ''));
+  const validatePhone = (phone) => /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im.test(phone) || /^\+?[\d\s-]{7,}$/.test(phone.replace(/\s/g, ''));
 
   const validateStep = (currentStep) => {
     const newErrors = {};
@@ -1318,7 +1318,7 @@ const Footer = ({ onNavigate }) => {
         </div>
         <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
           <p>&copy; {new Date().getFullYear()} Knowdata.ie. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0"><a href="#" className="hover:text-[#059669]">Privacy Policy</a><a href="#" className="hover:text-[#059669]">Terms</a></div>
+          <div className="flex space-x-6 mt-4 md:mt-0"><button onClick={() => onNavigate('contact')} className="hover:text-[#059669] bg-transparent border-none p-0 cursor-pointer text-slate-500">Privacy Policy</button><button onClick={() => onNavigate('contact')} className="hover:text-[#059669] bg-transparent border-none p-0 cursor-pointer text-slate-500">Terms</button></div>
         </div>
       </div>
     </footer>
